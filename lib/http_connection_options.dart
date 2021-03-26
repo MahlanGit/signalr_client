@@ -35,12 +35,14 @@ class HttpConnectionOptions {
   ///
   bool skipNegotiation;
 
+  String cookies;
   // Methods
   HttpConnectionOptions(
       {SignalRHttpClient httpClient,
       Object transport,
       Logger logger,
       AccessTokenFactory accessTokenFactory,
+        String cookies,
       bool logMessageContent = false,
       bool skipNegotiation = false})
       : this.httpClient = httpClient,
@@ -48,5 +50,7 @@ class HttpConnectionOptions {
         this.logger = logger,
         this.accessTokenFactory = accessTokenFactory,
         this.logMessageContent = logMessageContent,
-        this.skipNegotiation = skipNegotiation;
+        this.skipNegotiation = skipNegotiation,
+        this.cookies=cookies;
+
 }

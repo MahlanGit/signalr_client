@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:logging/logging.dart';
 import 'package:w3c_event_source/event_source.dart';
-
+import 'http_connection_options.dart';
 import 'errors.dart';
 import 'itransport.dart';
 import 'signalr_http_client.dart';
@@ -38,7 +38,7 @@ class ServerSentEventsTransport implements ITransport {
 
   // Methods
   @override
-  Future<void> connect(String url, TransferFormat transferFormat) async {
+  Future<void> connect(String url, TransferFormat transferFormat,{HttpConnectionOptions httpOptions}) async {
     assert(!isStringEmpty(url));
     assert(transferFormat != null);
     _logger?.finest("(SSE transport) Connecting");

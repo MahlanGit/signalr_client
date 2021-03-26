@@ -486,7 +486,7 @@ class HttpConnection implements IConnection {
   }
 
   String _createConnectUrl(String url, String connectionToken) {
-    if (connectionToken != null) {
+    if (connectionToken == null) {
       return url;
     }
 
@@ -579,7 +579,8 @@ class HttpConnection implements IConnection {
   Future<void> _startTransport(String url, TransferFormat transferFormat) {
     _transport.onReceive = onreceive;
     _transport.onClose = _stopConnection;
-    return _transport.connect(url, transferFormat);
+
+    return _transport.connect(url, transferFormat,httpOptions:this._options);
   }
 
   ITransport _resolveTransport(

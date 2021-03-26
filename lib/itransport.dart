@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'http_connection_options.dart';
 import 'errors.dart';
 
 /// Specifies a specific HTTP transport type.
@@ -74,7 +74,7 @@ typedef AccessTokenFactory = Future<String> Function();
 
 /// An abstraction over the behavior of transports. This is designed to support the framework and not intended for use by applications.
 abstract class ITransport {
-  Future<void> connect(String url, TransferFormat transferFormat);
+  Future<void> connect(String url, TransferFormat transferFormat,{HttpConnectionOptions httpOptions});
 
   /// data: the content. Either a string (json) or Uint8List (binary)
   Future<void> send(Object data);

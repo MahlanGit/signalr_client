@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:logging/logging.dart';
-
+import 'http_connection_options.dart';
 import 'abort_controller.dart';
 import 'errors.dart';
 import 'ihub_protocol.dart';
@@ -47,7 +47,7 @@ class LongPollingTransport implements ITransport {
   }
 
   @override
-  Future<void> connect(String url, TransferFormat transferFormat) async {
+  Future<void> connect(String url, TransferFormat transferFormat,{HttpConnectionOptions httpOptions}) async {
     assert(!isStringEmpty(url));
     assert(transferFormat != null);
 

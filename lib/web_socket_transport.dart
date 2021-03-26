@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
-
+import 'http_connection_options.dart';
 import 'package:logging/logging.dart';
 
 import 'errors.dart';
@@ -30,8 +30,9 @@ class WebSocketTransport implements ITransport {
         this._logger = logger,
         this._logMessageContent = logMessageContent;
 
+
   @override
-  Future<void> connect(String url, TransferFormat transferFormat) async {
+  Future<void> connect(String url, TransferFormat transferFormat,{HttpConnectionOptions httpOptions}) async {
     assert(url != null);
     assert(transferFormat != null);
 
@@ -50,7 +51,8 @@ class WebSocketTransport implements ITransport {
     var opened = false;
     url = url.replaceFirst('http', 'ws');
     _logger?.finest("WebSocket try connecting to '$url'.");
-    _webSocket = await WebSocket.connect(url);
+    Map<String,String> cookieHeaders={"cookie":httpOptions.cookies};
+    _webSocket = await WebSocket.connect(url,headers: cookieHeaders);
     opened = true;
     websocketCompleter.complete();
     _logger?.info("WebSocket connected to '$url'.");
